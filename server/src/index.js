@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const http = require("http");
 const { WebSocketServer, WebSocket } = require("ws");
@@ -5,7 +6,7 @@ const { v4: uuidv4 } = require("uuid");
 const roomManager = require("./services/roomManager");
 const connectDB = require("./db/connection");
 
-const PORT = 8000;
+const PORT = process.env.PORT || 8000;
 const HOST = "0.0.0.0";
 
 const app = express();

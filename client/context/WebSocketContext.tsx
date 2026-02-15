@@ -9,7 +9,7 @@ import React, {
   useCallback,
 } from "react";
 
-const WEBSOCKET_URL = "ws://localhost:8000";
+const WEBSOCKET_URL = "wss://real-time-poll-rooms-server.onrender.com";
 
 interface WebSocketContextType {
   isConnected: boolean;
