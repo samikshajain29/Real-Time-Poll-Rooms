@@ -201,17 +201,17 @@ v
     
 5.  *Run the Backend Server*:
     bash
-    ## From the /server directory
+    ### From the /server directory
     node src/index.js 
-    ## The server will be running on http://localhost:8080
+    ### The server will be running on http://localhost:8000
     
 6.  *Run the Frontend Application*:
     bash
-    ## From the /client directory
+    ### From the /client directory
     npm run dev
-    ## The application will be running on http://localhost:3000
+    ### The application will be running on http://localhost:3000
 
-## 🌍 Deployment
+### 🌍 Deployment
 
 - **Public URL:** https://your-app-url.com
 - **GitHub Repository:** https://github.com/your-username/repo-name
