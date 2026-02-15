@@ -201,15 +201,15 @@ v
     
 5.  *Run the Backend Server*:
     bash
-    # From the /server directory
+    ## From the /server directory
     node src/index.js 
-    # The server will be running on http://localhost:8080
+    ## The server will be running on http://localhost:8080
     
 6.  *Run the Frontend Application*:
     bash
-    # From the /client directory
+    ## From the /client directory
     npm run dev
-    # The application will be running on http://localhost:3000
+    ## The application will be running on http://localhost:3000
 
 ## 🌍 Deployment
 
@@ -231,7 +231,7 @@ v
 
 ---
 
-# ✅ Conclusion
+## ✅ Conclusion
 
 Real-Time Poll Rooms demonstrates a complete full-stack real-time system using the MERN stack and WebSockets. It combines:
 
