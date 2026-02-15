@@ -18,6 +18,9 @@ interface RoomState {
   isCreator?: boolean;
   creatorId: string;
 }
+interface RoomUser {
+  username: string;
+}
 
 interface RoleState {
   role: "creator" | "user" | null;
@@ -129,7 +132,7 @@ export default function RoomPage() {
         if (
           username &&
           messageData.payload.users.some(
-            (user: any) => user.username === username,
+            (user: RoomUser) => user.username === username,
           )
         ) {
           setHasJoined(true);

@@ -1,12 +1,12 @@
 // client/components/CreateOrJoinForm.tsx
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSocket } from "@/context/WebSocketContext";
 
 export default function CreateOrJoinForm() {
-  const [username, setUsername] = useState("");
+  const [username] = useState("");
   const [roomCode, setRoomCode] = useState("");
   const { isConnected, sendMessage, userId } = useSocket();
   const router = useRouter();
