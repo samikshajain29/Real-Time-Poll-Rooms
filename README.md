@@ -2,21 +2,19 @@
 
 ## Overview
 
-**Real-Time Poll Rooms** is a full-stack web application that allows users to create polls, share them via a unique link, and collect votes with live results for all participants. The app ensures real-time updates, fairness, and persistence across sessions.
+**Real-Time Poll Rooms** is a full stack web application designed to enable users to develop polls, distribute them through a specific link, and gather votes with instant results for all participants. The platform guarantees real-time synchronization, equitable voting, and consistent data retention even when users log out or refresh the page.
 
-Users can:
+Users have the ability to:
+- Formulate a poll by specifying a question and defining several response choices.
+- Share the poll using a unique URL.
+- Access any poll by entering the provided link and submit their vote.
+- Observe ongoing updates as other votes are received.
+- Avoid duplicate voting from the same user by employing session-based restrictions.
 
-- Create a poll with a question and multiple options.
-- Share a poll via a unique link.
-- Join any poll using the link and cast a vote.
-- See live updates as others vote.
-- Prevent multiple votes from the same participant using session-based controls.
-
-This project was built using the **MERN Stack**:
+This project was built using :-
 
 - **MongoDB**
-- **Express.js**
-- **React / Next.js**
+- **Next.js**
 - **Node.js**
 
 Real-time communication is handled using **WebSockets (ws)**.
@@ -27,7 +25,6 @@ Real-time communication is handled using **WebSockets (ws)**.
 
 - Features
 - Technology Stack
-- Architecture
 - Usage
 - Fairness / Anti-Abuse Mechanisms
 - Persistence
@@ -41,33 +38,29 @@ Real-time communication is handled using **WebSockets (ws)**.
 
 ### 1️⃣ Poll Creation
 
-- Users can create polls with a question and at least two options.
-- After creation, a unique shareable link is generated.
+- Users have the ability to set up polls by providing a question along with a minimum of two response choices.
+- Once a poll is set up, a distinct and shareable link is automatically created for distribution.
 
 ### 2️⃣ Join by Link
 
-- Anyone with the link can view the poll and vote.
-- Single-choice voting per participant.
+- Anyone who has the link can access the poll and cast their vote.
+- Each participant is allowed to vote only once with a single choice.
 
 ### 3️⃣ Real-Time Results
 
-- Results update instantly across all connected users using WebSockets.
-- No need to refresh the page.
+- Results are updated in real-time for all users who are connected, with the use of WebSockets.
+- There is no requirement to refresh the webpage to see the latest changes.
 
 ### 4️⃣ Fairness / Anti-Abuse
 
-- Session-based identity ensures one vote per participant per session.
-- IP address + browser session tracking prevent casual repeat voting.
+- Session-based identity ensures that each participant is allowed to cast only one vote during each session.
+- The application ensures vote integrity by integrating IP-based tracking with browser session validation.
+-  Any attempt to vote more than once, including those made through incognito or private browsing sessions, is automatically prevented.
 
 ### 5️⃣ Persistence
 
-- Polls and votes are stored in MongoDB.
-- Refreshing the page does not remove poll or vote data.
-
-### 6️⃣ Deployment
-
-- Fully deployed to a public URL.
-- Link-based joining works across multiple devices.
+- Polls and votes are kept in MongoDB.
+- Refreshing the page does not delete the poll or vote information.
 
 ---
 
@@ -75,24 +68,13 @@ Real-time communication is handled using **WebSockets (ws)**.
 
 | Layer | Technology |
 |--------|------------|
-| Frontend | React, Next.js |
-| Backend | Node.js, Express |
+| Frontend | Next.js |
+| Backend | Node.js |
 | Database | MongoDB, Mongoose |
 | Real-Time | WebSockets (ws) |
-| Deployment | Vercel / Render / Heroku (fill actual) |
+| Deployment | Vercel , Render |
 
 ---
-
-## 🏗️ Architecture
-[Browser / Client]
-|
-| WebSocket / HTTP
-v
-[Node.js + Express Server]
-|
-| MongoDB / Mongoose
-v
-[Persistence Layer: Polls, Votes]
 
 ### Explanation
 
@@ -117,7 +99,7 @@ v
 4. Copy the generated poll link.
 5. Share the link or open it in another tab.
 6. Users join the poll via the link.
-7. Enter name (if required).
+7. Enter name.
 8. Cast vote.
 9. Votes update live for all participants.
 
@@ -127,68 +109,62 @@ v
 
 ### 1️⃣ One Vote per User (Session-Based Voting)
 
-- Each participant is uniquely identified via a `clientId` stored in `localStorage`.
-- A user can vote only once per poll.
-- Refreshing the page does not reset voting eligibility.
-- Vote remains tied to that session.
+- Each participant is uniquely identified through a `clientId` that is saved in `localStorage`.
+- A user is allowed to cast only one vote for each poll.
+- Refreshing the page does not affect the user's eligibility to vote.
+- The vote is linked to the specific session in which it was cast.
 
-### 2️⃣ IP + Session Check
+### 2️⃣ IP Check
 
-- The server tracks participant IP addresses.
-- Prevents casual repeat voting from the same network.
-- If another session from the same IP attempts voting:
-  - One vote per session per poll is enforced.
-  - Unique name validation may be required.
+- The server records the IP addresses of participants.
+- This helps prevent multiple votes from the same network by the same person.
+- Using incognito or private browsing mode does not allow users to bypass these restrictions.
+- If another voting session from the same IP address occurs: 
+  - Only one vote is allowed per session for each poll.
+
+---
 
 ### ⚠️ Limitations
 
-- Users can bypass restrictions using:
+- Restrictions may be bypassed using:
   - Multiple devices
-  - Incognito mode
-  - VPN
-- Designed for assignment/demo scale, not enterprise-grade security.
+  - VPN or IP-masking tools
+- The system is designed for academic/demo purposes and is not intended for enterprise-grade security.
 
 ---
 
 ## 💾 Persistence
 
-- All polls and votes are stored in MongoDB.
-- Refreshing the page restores:
-  - Poll state
-  - Vote count
-  - Participant session
-- Room-specific username storage ensures no duplication after reload.
-
+- All polls and votes are saved in MongoDB.
+- Refreshing the page restores the following:
+  - The current state of the poll
+  - The total number of votes
+  - The participant's session
+- Storage of usernames specific to each room ensures that no duplicate usernames appear after the page is reloaded.
 ---
 
 ## 🧩 Edge Cases Handled
 
-- Block unauthorized users from starting polls.
-- Handle creator disconnect/reconnect without losing poll state.
-- Multiple rooms operate independently without data conflicts.
-- Vote cannot be cast twice from same session.
+- Prevent unauthorized individuals from initiating polls.
+- Ensure that the poll state is preserved even if the creator disconnects or reconnects.
+- Allow multiple rooms to function separately without causing data conflicts.
+- Prevent duplicate votes from the same session.
 
 ---
 
 ## 🚧 Known Limitations / Future Improvements
 
-- Multi-device same-user detection is limited.
-- Large-scale concurrency not load-tested.
-- Anti-abuse could be improved with:
-  - CAPTCHA
-  - OAuth authentication
-  - Rate limiting
-- UI improvements:
-  - Better mobile responsiveness
-  - Real-time animations
-  - Improved vote visualization charts
+- The system's ability to detect the same user across multiple devices is restricted.
+- It has not been tested for handling large numbers of simultaneous users.
+- Enhancements to prevent abuse could include implementing CAPTCHA, using OAuth authentication, and introducing rate limiting.
+- User interface improvements could involve better mobile responsiveness, real-time animations, and more effective visual representations of voting data.
 
 ---
 
 ## Local Setup and Installation ⚙️
 
-1.  *Prerequisites*: Node.js (v18 or higher) and npm installed.
-2.  *Clone the repository*: git clone <your-repo-url>
+1.  *Prerequisites*: Node.js and npm installed.
+2.  *Clone the repository*: git clone https://github.com/samikshajain29/Real-Time-Poll-Rooms
 3.  *Install Backend Dependencies*:
     bash
     cd server
@@ -201,43 +177,42 @@ v
     
 5.  *Run the Backend Server*:
     bash
-    ### From the /server directory
+    #### From the /server directory
     node src/index.js 
-    ### The server will be running on http://localhost:8000
+    #### The server will be running on http://localhost:8000
     
 6.  *Run the Frontend Application*:
     bash
-    ### From the /client directory
+    #### From the /client directory
     npm run dev
-    ### The application will be running on http://localhost:3000
+    #### The application will be running on http://localhost:3000
 
 ### 🌍 Deployment
 
-- **Public URL:** https://your-app-url.com
-- **GitHub Repository:** https://github.com/your-username/repo-name
+- **Public URL:** https://real-time-poll-rooms-iota.vercel.app/
+- **GitHub Repository:** https://github.com/samikshajain29/Real-Time-Poll-Rooms
 
 ---
 
 ## 📝 Notes
 
-- Real-time updates use WebSocket events:
+- Real-time updates are facilitated through WebSocket events, which include:
   - `join_room`
   - `vote`
   - `room_update`
   - `ROLE`
-- Session management uses `localStorage` per room.
-- Fairness ensures one vote per client session with basic IP protection.
-- Designed for demonstration and academic purposes.
+- Session management is handled using `localStorage` for each room.
+- The system ensures fairness by allowing only one vote per client session, with basic IP protection in place.
+-  This system is intended for demonstration and academic use.
 
 ---
 
 ## ✅ Conclusion
 
-Real-Time Poll Rooms demonstrates a complete full-stack real-time system using the MERN stack and WebSockets. It combines:
+- Real-Time Poll Rooms presents a fully functional real-time system. It integrates several key features including:
+  - Synchronized real-time data updates
+  - Fairness based on session management
+  - Persistent data storage in a database
+  - A scalable architecture organized around rooms
 
-- Real-time data synchronization
-- Session-based fairness
-- Database persistence
-- Scalable room-based architecture
-
-The project showcases practical implementation of modern web technologies for interactive, collaborative applications.
+- This project illustrates the practical application of contemporary web technologies, enabling the development of interactive and collaborative web applications.
