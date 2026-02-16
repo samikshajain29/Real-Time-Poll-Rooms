@@ -155,7 +155,7 @@ export default function CreatePollPage() {
                     {options.length > 2 && (
                       <button
                         onClick={() => removeOption(index)}
-                        className="w-full sm:w-auto px-4 py-2 sm:py-3 bg-red-500 text-white rounded-lg hover:bg-red-600 transition"
+                        className="w-full sm:w-auto px-4 py-2 sm:py-3 bg-red-500 text-white rounded-lg hover:bg-red-600 transition cursor-pointer"
                       >
                         Remove
                       </button>
@@ -223,13 +223,13 @@ export default function CreatePollPage() {
             <div className="flex gap-4">
               <button
                 onClick={() => router.push(`/room/${roomId}`)}
-                className="flex-1 py-4 text-lg font-bold text-white bg-linear-to-r from-purple-500 to-indigo-600 rounded-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300"
+                className="flex-1 py-4 text-lg font-bold text-white bg-linear-to-r from-purple-500 to-indigo-600 rounded-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 cursor-pointer"
               >
                 Go to Poll Room
               </button>
               <button
                 onClick={() => router.push("/")}
-                className="flex-1 py-4 text-lg font-bold text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300 transition"
+                className="flex-1 py-4 text-lg font-bold text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300 transition cursor-pointer"
               >
                 Create Another
               </button>

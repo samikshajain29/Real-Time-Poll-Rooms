@@ -51,7 +51,7 @@ export default function CreateOrJoinForm() {
       <div className="space-y-6">
         <button
           onClick={() => router.push("/create-poll")}
-          className="w-full py-4 text-lg font-bold text-white bg-linear-to-r from-purple-500 to-indigo-600 rounded-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300"
+          className="w-full py-4 text-lg font-bold text-white bg-linear-to-r from-purple-500 to-indigo-600 rounded-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 cursor-pointer"
         >
           Create New Poll Room
         </button>
@@ -73,7 +73,7 @@ export default function CreateOrJoinForm() {
           <button
             onClick={handleJoinRoom}
             disabled={!isConnected || !roomCode.trim()}
-            className="w-full py-4 text-lg font-bold text-white bg-linear-to-r from-teal-500 to-cyan-600 rounded-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 disabled:opacity-50 disabled:transform-none disabled:shadow-none"
+            className="w-full py-4 text-lg font-bold text-white bg-linear-to-r from-teal-500 to-cyan-600 rounded-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 disabled:opacity-50 disabled:transform-none disabled:shadow-none cursor-pointer"
           >
             Join Room
           </button>
