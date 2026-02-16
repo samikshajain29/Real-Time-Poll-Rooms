@@ -1,4 +1,4 @@
-# 🗳️ Real-Time Poll Rooms
+# 📊 Real-Time Poll Rooms
 
 ## Overview
 
@@ -77,31 +77,31 @@ Real-time communication is handled using **WebSockets (ws)**.
 ---
 
 ### Explanation
-
-- **Client** handles UI rendering and WebSocket connection.
-- **Server** manages:
-  - Room creation
-  - Vote validation
-  - Broadcasting live updates
-  - Fairness checks
-- **Database** stores:
-  - Poll details
-  - Votes
-  - Participant session data
+ 
+- The **Client** is responsible for rendering the user interface and maintaining the WebSocket connection.
+- The **Server** handles several key functions, including:
+  - Creating rooms
+  - Validating votes
+  - Broadcasting live updates to participants
+  - Ensuring fairness throughout the process
+- The **Database** is used to store:
+  - Poll information
+  - Recorded votes
+  - Data related to each participant's session.
 
 ---
 
 ## ▶️ Usage
 
 1. Open the Home Page.
-2. Click **Create Poll**.
-3. Enter question and options.
-4. Copy the generated poll link.
-5. Share the link or open it in another tab.
-6. Users join the poll via the link.
-7. Enter name.
-8. Cast vote.
-9. Votes update live for all participants.
+2. Click on the 'Create Poll' button.
+3. Input the question along with the available choices.
+4. Obtain the poll link that is generated.
+5. Distribute the link.
+6. Individuals who wish to participate join the poll using the provided link.
+7. Participants are required to enter their name.
+8. Each participant then selects their preferred option by casting a vote.
+9. The vote counts are displayed in real-time for all participants.
 
 ---
 
@@ -164,27 +164,39 @@ Real-time communication is handled using **WebSockets (ws)**.
 ## Local Setup and Installation ⚙️
 
 1.  *Prerequisites*: Node.js and npm installed.
-2.  *Clone the repository*: git clone https://github.com/samikshajain29/Real-Time-Poll-Rooms
+2.  *Clone the repository*:
+  ```bash
+   git clone https://github.com/samikshajain29/Real-Time-Poll-Rooms
+   ```
+
 3.  *Install Backend Dependencies*:
-    bash
+    ```bash
     cd server
     npm install
+    ```
     
 4.  *Install Frontend Dependencies*:
-    bash
+    ```bash
     cd client
     npm install
+    ```
     
 5.  *Run the Backend Server*:
-    bash
     #### From the /server directory
-    node src/index.js 
+    
+    ```bash
+    node src/index.js
+    ```
+    
     #### The server will be running on http://localhost:8000
     
-6.  *Run the Frontend Application*:
-    bash
+7.  *Run the Frontend Application*:
     #### From the /client directory
+    
+    ```bash
     npm run dev
+    ```
+    
     #### The application will be running on http://localhost:3000
 
 ### 🌍 Deployment
