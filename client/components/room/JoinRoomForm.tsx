@@ -55,7 +55,7 @@ export default function JoinRoomForm({
           <button
             type="submit"
             disabled={!username.trim() || isLoading}
-            className="w-full py-4 text-lg font-bold text-white bg-gradient-to-r from-purple-500 to-indigo-600 rounded-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 disabled:opacity-50 disabled:transform-none disabled:shadow-none"
+            className="w-full py-4 text-lg font-bold text-white bg-linear-to-r from-purple-500 to-indigo-600 rounded-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 disabled:opacity-50 disabled:transform-none disabled:shadow-none"
           >
             {isLoading ? "Joining Room..." : "Join Room"}
           </button>

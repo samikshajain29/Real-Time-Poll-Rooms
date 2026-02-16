@@ -213,7 +213,7 @@ export default function RoomPage() {
                     payload: { roomId: roomState.id, userId },
                   });
                 }}
-                className="w-full py-4 text-lg font-bold text-white bg-gradient-to-r from-green-500 to-emerald-600 rounded-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300"
+                className="w-full py-4 text-lg font-bold text-white bg-linear-to-r from-green-500 to-emerald-600 rounded-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300"
               >
                 Start Poll
               </button>
@@ -223,7 +223,7 @@ export default function RoomPage() {
             </div>
           )}
 
-        <div className="p-6 bg-white rounded-2xl shadow-lg flex-grow">
+        <div className="p-6 bg-white rounded-2xl shadow-lg grow">
           <UserList users={roomState.users} />
         </div>
         <div className="p-4 bg-white rounded-2xl shadow-lg text-center">

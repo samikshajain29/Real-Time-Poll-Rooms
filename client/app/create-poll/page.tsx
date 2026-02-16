@@ -105,9 +105,9 @@ export default function CreatePollPage() {
         </div>
 
         {!roomId ? (
-          <div className="space-y-6">
+          <div className="space-y-6 px-4 sm:px-0">
             <div>
-              <label className="block text-lg font-semibold text-gray-700 mb-2">
+              <label className="block text-base sm:text-lg font-semibold text-gray-700 mb-2">
                 Your Name
               </label>
               <input
@@ -115,12 +115,12 @@ export default function CreatePollPage() {
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 placeholder="Enter your name"
-                className="w-full px-4 py-3 text-lg text-gray-800 bg-gray-50 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-4 focus:ring-purple-300 transition"
+                className="w-full px-3 sm:px-4 py-2 sm:py-3 text-base sm:text-lg text-gray-800 bg-gray-50 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-4 focus:ring-purple-300 transition"
               />
             </div>
 
             <div>
-              <label className="block text-lg font-semibold text-gray-700 mb-2">
+              <label className="block text-base sm:text-lg font-semibold text-gray-700 mb-2">
                 Poll Question
               </label>
               <input
@@ -128,34 +128,34 @@ export default function CreatePollPage() {
                 value={question}
                 onChange={(e) => setQuestion(e.target.value)}
                 placeholder="What's your poll question?"
-                className="w-full px-4 py-3 text-lg text-gray-800 bg-gray-50 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-4 focus:ring-purple-300 transition"
+                className="w-full px-3 sm:px-4 py-2 sm:py-3 text-base sm:text-lg text-gray-800 bg-gray-50 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-4 focus:ring-purple-300 transition"
               />
             </div>
 
             <div>
               <div className="flex justify-between items-center mb-2">
-                <label className="block text-lg font-semibold text-gray-700">
+                <label className="block text-base sm:text-lg font-semibold text-gray-700">
                   Poll Options
                 </label>
-                <span className="text-sm text-gray-500">
+                <span className="text-xs sm:text-sm text-gray-500">
                   {options.length} of 6 options
                 </span>
               </div>
 
               <div className="space-y-3">
                 {options.map((option, index) => (
-                  <div key={index} className="flex gap-2">
+                  <div key={index} className="flex flex-col sm:flex-row gap-2">
                     <input
                       type="text"
                       value={option}
                       onChange={(e) => updateOption(index, e.target.value)}
                       placeholder={`Option ${index + 1}`}
-                      className="flex-1 px-4 py-3 text-lg text-gray-800 bg-gray-50 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-4 focus:ring-purple-300 transition"
+                      className="flex-1 px-3 sm:px-4 py-2 sm:py-3 text-base sm:text-lg text-gray-800 bg-gray-50 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-4 focus:ring-purple-300 transition"
                     />
                     {options.length > 2 && (
                       <button
                         onClick={() => removeOption(index)}
-                        className="px-4 py-3 bg-red-500 text-white rounded-lg hover:bg-red-600 transition"
+                        className="w-full sm:w-auto px-4 py-2 sm:py-3 bg-red-500 text-white rounded-lg hover:bg-red-600 transition"
                       >
                         Remove
                       </button>
@@ -167,7 +167,7 @@ export default function CreatePollPage() {
               {options.length < 6 && (
                 <button
                   onClick={addOption}
-                  className="w-full mt-3 py-3 text-lg font-semibold text-purple-600 border-2 border-purple-500 rounded-lg hover:bg-purple-50 transition"
+                  className="w-full mt-3 py-2 sm:py-3 text-base sm:text-lg font-semibold text-purple-600 border-2 border-purple-500 rounded-lg hover:bg-purple-50 transition"
                 >
                   + Add Option
                 </button>
@@ -177,7 +177,7 @@ export default function CreatePollPage() {
             <button
               onClick={handleSubmit}
               disabled={!validateForm() || !isConnected || isCreating}
-              className="w-full py-4 text-lg font-bold text-white bg-gradient-to-r from-purple-500 to-indigo-600 rounded-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 disabled:opacity-50 disabled:transform-none disabled:shadow-none"
+              className="w-full py-4 text-lg font-bold text-white bg-linear-to-r from-purple-500 to-indigo-600 rounded-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 disabled:opacity-50 disabled:transform-none disabled:shadow-none"
             >
               {isCreating ? "Creating Room..." : "Create Poll Room"}
             </button>
@@ -200,20 +200,20 @@ export default function CreatePollPage() {
               </p>
             </div>
 
-            <div className="p-6 bg-gray-50 rounded-xl">
-              <h3 className="text-lg font-semibold text-gray-700 mb-3">
+            <div className="p-4 sm:p-6 bg-gray-50 rounded-xl">
+              <h3 className="text-base sm:text-lg font-semibold text-gray-700 mb-3">
                 Share this link:
               </h3>
-              <div className="flex gap-2">
+              <div className="flex flex-col sm:flex-row gap-2">
                 <input
                   type="text"
                   readOnly
                   value={`${window.location.origin}/room/${roomId}`}
-                  className="flex-1 px-4 py-3 text-gray-800 bg-white border-2 border-gray-300 rounded-lg"
+                  className="w-full sm:flex-1 px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base text-gray-800 bg-white border-2 border-gray-300 rounded-lg"
                 />
                 <button
                   onClick={copyToClipboard}
-                  className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition font-semibold"
+                  className="w-full sm:w-auto px-4 sm:px-6 py-2 sm:py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition font-semibold text-sm sm:text-base"
                 >
                   Copy
                 </button>
@@ -223,7 +223,7 @@ export default function CreatePollPage() {
             <div className="flex gap-4">
               <button
                 onClick={() => router.push(`/room/${roomId}`)}
-                className="flex-1 py-4 text-lg font-bold text-white bg-gradient-to-r from-purple-500 to-indigo-600 rounded-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300"
+                className="flex-1 py-4 text-lg font-bold text-white bg-linear-to-r from-purple-500 to-indigo-600 rounded-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300"
               >
                 Go to Poll Room
               </button>

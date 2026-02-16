@@ -1,4 +1,3 @@
-// client/components/CreateOrJoinForm.tsx
 "use client";
 
 import { useState } from "react";
@@ -52,15 +51,15 @@ export default function CreateOrJoinForm() {
       <div className="space-y-6">
         <button
           onClick={() => router.push("/create-poll")}
-          className="w-full py-4 text-lg font-bold text-white bg-gradient-to-r from-purple-500 to-indigo-600 rounded-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300"
+          className="w-full py-4 text-lg font-bold text-white bg-linear-to-r from-purple-500 to-indigo-600 rounded-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300"
         >
           Create New Poll Room
         </button>
 
         <div className="relative flex items-center">
-          <div className="flex-grow border-t border-gray-300"></div>
-          <span className="flex-shrink mx-4 text-gray-400">OR</span>
-          <div className="flex-grow border-t border-gray-300"></div>
+          <div className="grow border-t border-gray-300"></div>
+          <span className="shrink mx-4 text-gray-400">OR</span>
+          <div className="grow border-t border-gray-300"></div>
         </div>
 
         <div className="flex space-x-3">
@@ -74,7 +73,7 @@ export default function CreateOrJoinForm() {
           <button
             onClick={handleJoinRoom}
             disabled={!isConnected || !roomCode.trim()}
-            className="w-full py-4 text-lg font-bold text-white bg-gradient-to-r from-teal-500 to-cyan-600 rounded-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 disabled:opacity-50 disabled:transform-none disabled:shadow-none"
+            className="w-full py-4 text-lg font-bold text-white bg-linear-to-r from-teal-500 to-cyan-600 rounded-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 disabled:opacity-50 disabled:transform-none disabled:shadow-none"
           >
             Join Room
           </button>

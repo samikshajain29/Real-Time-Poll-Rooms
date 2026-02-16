@@ -14,7 +14,7 @@ export default function UserList({ users }: UserListProps) {
       <h3 className="text-xl font-bold text-center text-gray-800 mb-4">
         Participants ({users.length})
       </h3>
-      <ul className="space-y-3 flex-grow overflow-y-auto">
+      <ul className="space-y-3 grow overflow-y-auto">
         {users.map((user, index) => (
           <li
             key={index}
