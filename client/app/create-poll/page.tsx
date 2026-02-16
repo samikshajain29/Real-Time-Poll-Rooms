@@ -128,7 +128,7 @@ export default function CreatePollPage() {
                 value={question}
                 onChange={(e) => setQuestion(e.target.value)}
                 placeholder="What's your poll question?"
-                className="w-full px-3 sm:px-4 py-2 sm:py-3 sm:text-sm text-base text-gray-800 bg-gray-50 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-4 focus:ring-purple-300 transition"
+                className="w-full px-3 sm:px-4 py-2 sm:py-3 sm:text-lg text-base text-gray-800 bg-gray-50 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-4 focus:ring-purple-300 transition"
               />
             </div>
 

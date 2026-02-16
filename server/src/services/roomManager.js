@@ -12,10 +12,10 @@ try {
 const { v4: uuidv4 } = require("uuid");
 
 /**
- * @param {string} [question] - The poll question
- * @param {string[]} [options] - Array of poll options
- * @param {string} creatorId - The ID of the user creating the room
- * @returns {object} The newly created room object.
+ * @param {string} [question] - Question of the poll
+ * @param {string[]} [options] - options of the poll
+ * @param {string} creatorId - creator ID
+ * @returns {object}
  */
 async function createRoom(question, options, creatorId, creatorSocketId) {
   const roomId = generateRoomId();
@@ -25,13 +25,11 @@ async function createRoom(question, options, creatorId, creatorSocketId) {
   let safeOptions =
     options && Array.isArray(options) ? options : ["Cats", "Dogs"];
 
-  // Filter out empty options and ensure at least 2 options
-  safeOptions = safeOptions.filter((opt) => opt && opt.trim()).slice(0, 6); // Max 6 options
+  safeOptions = safeOptions.filter((opt) => opt && opt.trim()).slice(0, 6);
   if (safeOptions.length < 2) {
-    safeOptions = ["Cats", "Dogs"]; // Fallback to default
+    safeOptions = ["Cats", "Dogs"];
   }
 
-  // Create votes object dynamically based on options
   const votes = {};
   safeOptions.forEach((_, index) => {
     votes[`option${String.fromCharCode(65 + index)}`] = 0;
@@ -76,15 +74,14 @@ async function createRoom(question, options, creatorId, creatorSocketId) {
 }
 
 /**
- * @param {string} roomId The ID of the room.
- * @returns {object|undefined} The room object or undefined if not found.
+ * @param {string} roomId
+ * @returns {object|undefined}
  */
 function getRoom(roomId) {
   return rooms.get(roomId);
 }
 
 /**
- * Loads all active polls from MongoDB into memory.
  * @returns {Promise<void>}
  */
 async function loadPollsFromDB() {
@@ -141,8 +138,7 @@ async function loadPollsFromDB() {
   }
 }
 /**
- * Updates a poll in MongoDB.
- * @param {string} roomId - The ID of the room to update.
+ * @param {string} roomId
  * @returns {Promise<void>}
  */
 async function updatePollInDB(roomId) {
@@ -170,9 +166,8 @@ async function updatePollInDB(roomId) {
   }
 }
 /**
- * Updates participants in MongoDB.
- * @param {string} roomId - The ID of the room to update.
- * @param {Array} participants - The participants to update.
+ * @param {string} roomId
+ * @param {Array} participants
  * @returns {Promise<void>}
  */
 async function updateParticipantsInDB(roomId, participants) {
@@ -187,11 +182,10 @@ async function updateParticipantsInDB(roomId, participants) {
   }
 }
 /**
- * Adds a user to a specific room.
- * @param {string} roomId The ID of the room to join.
- * @param {string} userId A unique ID for the user's WebSocket connection.
- * @param {string} username The user's name.
- * @returns {object|null} The room object if joined successfully, otherwise null.
+ * @param {string} roomId -id of room
+ * @param {string} userId
+ * @param {string} username
+ * @returns {object|null}
  */
 function joinRoom(roomId, userId, username) {
   const room = getRoom(roomId);
@@ -228,7 +222,6 @@ function joinRoom(roomId, userId, username) {
 }
 
 /**
- * Handles a vote from a user for a specific option.
  * @param {string} roomId
  * @param {string} userId
  * @param {string} option
@@ -273,7 +266,6 @@ function handleVote(roomId, userId, option, ipAddress) {
 }
 
 /**
- * Generates a random 5-character ID for a room.
  * @returns {string}
  */
 function generateRoomId() {
