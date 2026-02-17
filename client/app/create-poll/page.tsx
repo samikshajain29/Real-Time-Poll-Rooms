@@ -13,15 +13,6 @@ export default function CreatePollPage() {
   const router = useRouter();
   const staleMessageRef = useRef<MessageEvent | null>(null);
 
-  useEffect(() => {
-    const storedName = localStorage.getItem("poll_creator_username");
-    if (storedName) {
-      setUsername(storedName);
-    } else {
-      router.push("/");
-    }
-  }, [router]);
-
   const addOption = () => {
     if (options.length < 6) {
       setOptions([...options, ""]);
