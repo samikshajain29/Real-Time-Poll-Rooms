@@ -65,13 +65,25 @@ wss.on("close", function close() {
   clearInterval(interval);
 });
 
-wss.on("connection", (ws) => {
+wss.on("connection", (ws, req) => {
   const socketId = uuidv4();
   ws.userId = socketId;
   ws.isAlive = true;
   ws.on("pong", heartbeat);
 
-  console.log(`Client ${socketId} connected`);
+  // Extract IP properly for proxies (Vercel/Heroku/Render) or direct connections
+  let ip =
+    req.headers["x-forwarded-for"]?.split(",")[0].trim() ||
+    req.socket.remoteAddress;
+  
+  // Normalize IPv6 mapped IPv4 addresses (::ffff:127.0.0.1 -> 127.0.0.1)
+  if (ip && ip.startsWith("::ffff:")) {
+    ip = ip.substring(7);
+  }
+
+  ws.clientIp = ip;
+
+  console.log(`Client ${socketId} connected from IP: ${ip}`);
 
   ws.on("message", async (message) => {
     try {
@@ -325,10 +337,7 @@ wss.on("connection", (ws) => {
 
           if (room) {
             if (room.status === "active") {
-              const ipAddress = ws.upgradeReq
-                ? ws.upgradeReq.headers["x-forwarded-for"] ||
-                  ws.upgradeReq.connection.remoteAddress
-                : ws._socket.remoteAddress;
+              const ipAddress = ws.clientIp;
 
               roomManager.handleVote(roomId, participantId, option, ipAddress);
               broadcastRoomState(roomId);
