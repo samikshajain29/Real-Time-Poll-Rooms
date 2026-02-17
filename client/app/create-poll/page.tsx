@@ -74,7 +74,10 @@ export default function CreatePollPage() {
         const messageData = JSON.parse(lastMessage.data);
         console.log("Received WebSocket message:", messageData);
 
-        if (messageData.type === "room_created") {
+        if (
+          messageData.type === "room_created" ||
+          messageData.type === "room_update"
+        ) {
           const newRoomId = messageData.payload.id;
           setRoomId(newRoomId);
           setIsCreating(false);
