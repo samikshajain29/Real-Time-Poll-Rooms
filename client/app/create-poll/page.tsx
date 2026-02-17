@@ -80,8 +80,11 @@ export default function CreatePollPage() {
           isCreating
         ) {
           const newRoomId = messageData.payload.id;
+
           setRoomId(newRoomId);
           setIsCreating(false);
+
+          localStorage.setItem(`poll_username_${newRoomId}`, username.trim());
         } else if (messageData.type === "error") {
           console.error("Error from server:", messageData.payload.message);
           setIsCreating(false);
