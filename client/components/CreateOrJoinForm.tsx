@@ -57,7 +57,12 @@ export default function CreateOrJoinForm() {
           className="w-full px-4 py-3 text-lg text-gray-800 bg-gray-50 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-4 focus:ring-purple-300 transition"
         />
         <button
-          onClick={() => router.push("/create-poll")}
+          onClick={() => {
+            if (username.trim()) {
+              localStorage.setItem("poll_creator_username", username.trim());
+              router.push("/create-poll");
+            }
+          }}
           disabled={!username.trim()}
           className={`w-full py-4 text-lg font-bold text-white rounded-lg transition-all duration-300
       ${
