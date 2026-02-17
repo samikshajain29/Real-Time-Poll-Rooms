@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useSocket } from "@/context/WebSocketContext";
 
 export default function CreateOrJoinForm() {
-  const [username] = useState("");
+  const [username, setUsername] = useState("");
   const [roomCode, setRoomCode] = useState("");
   const { isConnected, sendMessage, userId } = useSocket();
   const router = useRouter();
@@ -49,9 +49,22 @@ export default function CreateOrJoinForm() {
       </div>
 
       <div className="space-y-6">
+        <input
+          type="text"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          placeholder="Your Name"
+          className="w-full px-4 py-3 text-lg text-gray-800 bg-gray-50 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-4 focus:ring-purple-300 transition"
+        />
         <button
           onClick={() => router.push("/create-poll")}
-          className="w-full py-4 text-lg font-bold text-white bg-linear-to-r from-purple-500 to-indigo-600 rounded-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 cursor-pointer"
+          disabled={!username.trim()}
+          className={`w-full py-4 text-lg font-bold text-white rounded-lg transition-all duration-300
+      ${
+        username.trim()
+          ? "bg-linear-to-r from-purple-500 to-indigo-600 hover:shadow-xl transform hover:-translate-y-1 cursor-pointer"
+          : "bg-gray-300 cursor-not-allowed"
+      }`}
         >
           Create New Poll Room
         </button>
