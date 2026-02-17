@@ -55,7 +55,7 @@ Real-time communication is handled using **WebSockets (ws)**.
 
 - Session-based identity ensures that each participant is allowed to cast only one vote during each session.
 - The application ensures vote integrity by integrating IP-based tracking with browser session validation.
--  Any attempt to vote more than once, including those made through incognito or private browsing sessions, is automatically prevented.
+-  Any attempt to vote more than once, including those made through incognito, multiple tabs or private browsing sessions, is automatically prevented.
 
 ### 5️⃣ Persistence
 
@@ -118,7 +118,7 @@ Real-time communication is handled using **WebSockets (ws)**.
 
 - The server records the IP addresses of participants.
 - This helps prevent multiple votes from the same network by the same person.
-- Using incognito or private browsing mode does not allow users to bypass these restrictions.
+- Using incognito, multiple tabs or private browsing mode does not allow users to bypass these restrictions.
 - If another voting session from the same IP address occurs: 
   - Only one vote is allowed per session for each poll.
 
