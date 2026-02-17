@@ -325,10 +325,19 @@ wss.on("connection", (ws) => {
 
           if (room) {
             if (room.status === "active") {
-              const ipAddress = ws.upgradeReq
-                ? ws.upgradeReq.headers["x-forwarded-for"] ||
-                  ws.upgradeReq.connection.remoteAddress
-                : ws._socket.remoteAddress;
+              let ipAddress =
+                ws._socket?.parser?.incoming?.headers["x-forwarded-for"] ||
+                ws._socket?.remoteAddress;
+
+              // If multiple IPs (proxy chain), take first one
+              if (ipAddress && ipAddress.includes(",")) {
+                ipAddress = ipAddress.split(",")[0].trim();
+              }
+
+              // Normalize IPv6 format
+              if (ipAddress && ipAddress.startsWith("::ffff:")) {
+                ipAddress = ipAddress.replace("::ffff:", "");
+              }
 
               roomManager.handleVote(roomId, participantId, option, ipAddress);
               broadcastRoomState(roomId);
