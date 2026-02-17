@@ -89,12 +89,6 @@ export default function CreatePollPage() {
           messageData.type === "room_update"
         ) {
           const newRoomId = messageData.payload.id;
-          
-          // Save the username specifically for this room so rejoining works with this identity
-          if (username.trim()) {
-            localStorage.setItem(`poll_username_${newRoomId}`, username.trim());
-          }
-
           setRoomId(newRoomId);
           setIsCreating(false);
         } else if (messageData.type === "error") {
