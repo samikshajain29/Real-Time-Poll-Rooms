@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { useSocket } from "@/context/WebSocketContext";
 
@@ -11,6 +11,7 @@ export default function CreatePollPage() {
   const [isCreating, setIsCreating] = useState(false);
   const { isConnected, sendMessage, lastMessage, userId } = useSocket();
   const router = useRouter();
+  const staleMessageRef = useRef<MessageEvent | null>(null);
 
   const addOption = () => {
     if (options.length < 6) {
@@ -44,6 +45,7 @@ export default function CreatePollPage() {
     if (!validateForm() || !isConnected || isCreating) return;
 
     setIsCreating(true);
+    staleMessageRef.current = lastMessage;
 
     const trimmedQuestion = question.trim();
     const trimmedOptions = options.map((opt) => opt.trim());
@@ -68,23 +70,18 @@ export default function CreatePollPage() {
   };
 
   useEffect(() => {
-    if (lastMessage) {
+    if (lastMessage && isCreating && lastMessage !== staleMessageRef.current) {
       try {
         const messageData = JSON.parse(lastMessage.data);
         console.log("Received WebSocket message:", messageData);
 
         if (
-          (messageData.type === "room_created" ||
-            messageData.type === "room_update") &&
-          messageData.payload?.id &&
-          isCreating
+          messageData.type === "room_created" ||
+          messageData.type === "room_update"
         ) {
           const newRoomId = messageData.payload.id;
-
           setRoomId(newRoomId);
           setIsCreating(false);
-
-          localStorage.setItem(`poll_username_${newRoomId}`, username.trim());
         } else if (messageData.type === "error") {
           console.error("Error from server:", messageData.payload.message);
           setIsCreating(false);
