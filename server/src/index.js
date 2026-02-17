@@ -65,7 +65,8 @@ wss.on("close", function close() {
   clearInterval(interval);
 });
 
-wss.on("connection", (ws) => {
+wss.on("connection", (ws, request) => {
+  ws.request = request;
   const socketId = uuidv4();
   ws.userId = socketId;
   ws.isAlive = true;
@@ -325,10 +326,17 @@ wss.on("connection", (ws) => {
 
           if (room) {
             if (room.status === "active") {
-              const ipAddress = ws.upgradeReq
-                ? ws.upgradeReq.headers["x-forwarded-for"] ||
-                  ws.upgradeReq.connection.remoteAddress
-                : ws._socket.remoteAddress;
+              let ipAddress =
+                ws.request.headers["x-forwarded-for"] ||
+                ws.request.socket.remoteAddress;
+
+              if (ipAddress && ipAddress.includes(",")) {
+                ipAddress = ipAddress.split(",")[0].trim();
+              }
+
+              if (ipAddress && ipAddress.startsWith("::ffff:")) {
+                ipAddress = ipAddress.replace("::ffff:", "");
+              }
 
               roomManager.handleVote(roomId, participantId, option, ipAddress);
               broadcastRoomState(roomId);

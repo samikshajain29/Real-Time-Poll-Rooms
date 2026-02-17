@@ -231,6 +231,8 @@ function handleVote(roomId, userId, option, ipAddress) {
   const room = getRoom(roomId);
   if (!room) return;
 
+  console.log("IP RECEIVED IN handleVote:", ipAddress);
+
   if (ipAddress && room.voterIps.has(ipAddress)) {
     console.log(
       `SERVER: Rejected duplicate vote from IP ${ipAddress} in room ${roomId}`,
