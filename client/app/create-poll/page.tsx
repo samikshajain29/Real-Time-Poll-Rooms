@@ -1,5 +1,4 @@
 "use client";
-
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useSocket } from "@/context/WebSocketContext";
@@ -75,8 +74,10 @@ export default function CreatePollPage() {
         console.log("Received WebSocket message:", messageData);
 
         if (
-          messageData.type === "room_created" ||
-          messageData.type === "room_update"
+          (messageData.type === "room_created" ||
+            messageData.type === "room_update") &&
+          messageData.payload?.id &&
+          isCreating
         ) {
           const newRoomId = messageData.payload.id;
           setRoomId(newRoomId);
@@ -90,7 +91,7 @@ export default function CreatePollPage() {
         console.error("Failed to parse WebSocket message:", error);
       }
     }
-  }, [lastMessage]);
+  }, [lastMessage, isCreating]);
 
   return (
     <main className="flex items-center justify-center min-h-screen bg-gray-100 p-4">
